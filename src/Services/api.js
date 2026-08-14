@@ -2,14 +2,11 @@
 import axios from "axios";
 
 // ★ PERBAIKAN UNTUK HOSTING ★
-// Jika website dijalankan di lokal (localhost), pakai port 5000.
-// Jika sudah di-deploy ke Vercel, otomatis akan memakai link hosting.
 const isProduction = process.env.NODE_ENV === 'production';
 
-// Ganti 'nama-user-github' dan 'nama-repo' dengan punya Anda
-// Contoh: https://my-json-server.typicode.com/abdul/desa-tasik-main
+// ★ SUDAH DISESUAIKAN DENGAN REPO ANDA ★
 const API_URL = isProduction 
-  ? "https://my-json-server.typicode.com/NAMA_USER_GITHUB/NAMA_REPO_ANDA" 
+  ? "https://my-json-server.typicode.com/AbdulRosyid0610/Desa-uprade" 
   : "http://localhost:5000";
 
 const api = axios.create({
