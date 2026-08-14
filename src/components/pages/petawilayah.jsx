@@ -315,7 +315,7 @@ const PetaWilayah = () => {
       <aside className="peta-sidebar">
         <div className="peta-brand">
           <div>
-            <span className="peta-kicker">🗺️ PEMETAAN DIGITAL</span>
+            <span className="peta-kicker"> PEMETAAN DIGITAL</span>
             <h2>
               Peta Wilayah
               <br />
@@ -385,7 +385,7 @@ const PetaWilayah = () => {
         {/* MAP HEADER dengan aksi */}
         <div className="map-header">
           <div className="map-header-left">
-            <span className="map-badge">📍 Interaktif</span>
+            <span className="map-badge"> Interaktif</span>
             <span className="map-coord">7°08'27.12" S · 108°12'45.89" E</span>
           </div>
           <div className="map-header-right">

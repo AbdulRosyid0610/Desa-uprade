@@ -1,7 +1,7 @@
-// src/components/Login.jsx
+// src/components/pages/Login.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Login.css';
+import './Login.css'; // Menggunakan CSS eksternal Anda
 
 // ============================================
 // CONSTANTS
@@ -66,7 +66,6 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
     handleLogin();
   };
 
@@ -95,6 +94,7 @@ const Login = () => {
         isLoggedIn: true
       });
 
+      // Jika admin, arahkan ke dashboard admin. Jika user biasa, ke beranda.
       navigate(foundUser.role === 'admin' ? '/admin/dashboard' : '/');
     }, 1500);
   };
@@ -108,7 +108,7 @@ const Login = () => {
       <div className="login-container">
         {/* Header */}
         <div className="login-header">
-          <h1> Desa Padakembang</h1>
+          <h1>Desa Padakembang</h1>
           <p className="login-subtitle">Desa Digital - Sistem Informasi Desa</p>
         </div>
 
@@ -117,9 +117,10 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="login-form">
             {/* Email */}
             <div className="form-group">
-              <label>Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -130,9 +131,10 @@ const Login = () => {
 
             {/* Password */}
             <div className="form-group">
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
+                id="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}

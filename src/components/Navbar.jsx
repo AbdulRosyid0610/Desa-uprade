@@ -1,145 +1,72 @@
-// src/components/Navbar.jsx
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Navbar.css';
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import './Navbar.css' // ★ JANGAN LUPA IMPOR CSS NYA
 
-// ============================================
-// CONSTANTS - TAMBAHKAN 'layanan' DI SINI
-// ============================================
-const NAV_ITEMS = [
-  { id: 'beranda', label: 'Beranda' },
-  { id: 'profil', label: 'Profil' },
-  { id: 'anggota', label: 'Aparat' },
-  { id: 'statistik', label: 'Statistik' },
-  { id: 'peta-wilayah', label: 'Peta Wilayah' },
-  { id: 'berita', label: 'Berita' },
-  { id: 'layanan', label: 'Layanan' }, // 👈 TAMBAHKAN LAYANAN
-  { id: 'umkm', label: 'UMKM' },
-  { id: 'cctv', label: 'CCTV' },
-];
+const Navbar = ({ menuOpen, setMenuOpen }) => {
+  const toggleMenu = () => setMenuOpen(!menuOpen)
+  const location = useLocation()
 
-// ============================================
-// COMPONENT: Navbar
-// ============================================
-const Navbar = () => {
-  const location = useLocation();
-
-  const [activeNav, setActiveNav] = useState('beranda');
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Sembunyikan navbar di halaman admin
-  if (location.pathname.startsWith('/admin')) {
-    return null;
+  // Fungsi untuk menentukan class active
+  const getLinkClass = (path) => {
+    return location.pathname === path ? 'navbar__link navbar__link--active' : 'navbar__link'
   }
 
-  // ============================================
-  // EFFECTS
-  // ============================================
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // ============================================
-  // EFFECT: Update active nav based on scroll
-  // ============================================
-  useEffect(() => {
-    const handleScrollActive = () => {
-      const sections = NAV_ITEMS.map(item => document.getElementById(item.id));
-      
-      // Cari section yang sedang terlihat
-      let currentSection = 'beranda';
-      sections.forEach((section, index) => {
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          // Jika section berada di viewport
-          if (rect.top <= 200) {
-            currentSection = NAV_ITEMS[index]?.id || 'beranda';
-          }
-        }
-      });
-      
-      setActiveNav(currentSection);
-    };
-
-    window.addEventListener('scroll', handleScrollActive);
-    return () => window.removeEventListener('scroll', handleScrollActive);
-  }, []);
-
-  // ============================================
-  // HANDLERS
-  // ============================================
-  const scrollToSection = (id) => {
-    setActiveNav(id);
-    setIsMenuOpen(false);
-
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
-  // ============================================
-  // RENDER
-  // ============================================
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className="navbar">
       <div className="navbar__container">
-        {/* LOGO */}
-        <a href="#beranda" className="navbar__brand">
-          <img
-            src="/images.png"
-            alt="Logo desa Padakembang"
-            className="navbar__logo"
-          />
-          <span className="navbar__title">
-            Desa Digital <span>Padakembang</span>
+        
+        {/* ===== LOGO (KIRI) ===== */}
+        <Link to="/" className="navbar__brand">
+          <img src="/Images/images.png" alt="Logo Desa" className="navbar__logo" />
+          
+          <span className="navbar__brand-title">
+            Desa Digital 
+            <span className="navbar__brand-highlight">Padakembang</span>
           </span>
-        </a>
+        </Link>
 
-        {/* TOGGLE MOBILE */}
-        <button
-          className="navbar__toggle"
+        {/* ===== TOMBOL HAMBURGER (MOBILE) ===== */}
+        <button 
+          className="navbar__toggle" 
           onClick={toggleMenu}
-          aria-label="Toggle menu"
         >
-          {isMenuOpen ? '✕' : '☰'}
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
 
-        {/* NAVIGATION MENU */}
-        <ul className={`navbar__menu ${isMenuOpen ? 'is-open' : ''}`}>
-          {NAV_ITEMS.map((item) => (
-            <li key={item.id}>
-              <button
-                className={`navbar__link ${
-                  activeNav === item.id ? 'is-active' : ''
-                }`}
-                onClick={() => scrollToSection(item.id)}
-              >
-                {item.label}
-              </button>
-            </li>
-          ))}
+        {/* ===== MENU NAVIGASI (KANAN) ===== */}
+        {/* Class 'navbar__menu--open' akan ditambahkan jika menuOpen true */}
+        <ul className={`navbar__menu ${menuOpen ? 'navbar__menu--open' : ''}`}>
+          <li><Link to="/" className={getLinkClass('/')}>Beranda</Link></li>
+          <li><Link to="/profile" className={getLinkClass('/profile')}>Profil</Link></li>
+          <li><Link to="/energi" className={getLinkClass('/energi')}>Energi</Link></li>
+          <li><Link to="/berita" className={getLinkClass('/berita')}>Berita</Link></li>
+          <li><Link to="/UMKM" className={getLinkClass('/UMKM')}>UMKM</Link></li>
+          <li><Link to="/layanan" className={getLinkClass('/layanan')}>Layanan</Link></li>
+          <li><Link to="/statistik" className={getLinkClass('/statistik')}>Statistik</Link></li>
+          <li><Link to="/aparat" className={getLinkClass('/aparat')}>Aparat</Link></li>
+          <li><Link to="/peta" className={getLinkClass('/peta')}>Peta</Link></li>
+          <li><Link to="/cctv" className={getLinkClass('/cctv')}>CCTV</Link></li>
+          
+          {/* Tombol Ajukan Layanan */}
+          <li>
+            <Link to="/layanan/form" className="navbar__cta">
+              Ajukan Layanan
+            </Link>
+          </li>
 
-          {/* ADMIN LOGIN */}
+          {/* ★ TAMBAHAN BARU: Tombol Login Admin ★ */}
           <li>
             <Link to="/login" className="navbar__login">
-              ADMIN LOGIN
+              <span className="icon"></span> Login Admin
             </Link>
           </li>
         </ul>
+
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

@@ -1,364 +1,169 @@
 /* ============================================================
    src/components/Navbar.css
    NAVIGATION - DESA DIGITAL PADAKEMBANG
-   Version: 2.0 - Upgraded with Layanan Online
+   VERSION FINAL - RAPI & PADAT
    ============================================================ */
 
 /* ============================================================
-   1. ROOT VARIABLES
-   ============================================================ */
-:root {
-  /* Color palette - Blue + Silver */
-  --nav-blue-900: #0a2540;
-  --nav-blue-800: #0f3b5c;
-  --nav-blue-700: #1a5276;
-  --nav-blue-600: #206a94;
-  --nav-blue-500: #2980b9;
-  --nav-blue-400: #5dade2;
-  --nav-blue-300: #85c1e9;
-  --nav-blue-100: #ebf5fb;
-  --nav-blue-50: #f7fbfd;
-  
-  --nav-silver-100: #f5f7fa;
-  --nav-silver-200: #e8ecf0;
-  --nav-silver-300: #d5dde5;
-  --nav-silver-400: #b0bec5;
-  --nav-silver-500: #8a97a5;
-  --nav-silver-600: #6b7a8a;
-  
-  --nav-ink: #1f2a37;
-  --nav-ink-light: #4a5a6e;
-  --nav-white: #ffffff;
-  --nav-success: #27ae60;
-  --nav-warning: #f39c12;
-  --nav-danger: #e74c3c;
-
-  /* Spacing scale */
-  --nav-space-xs: 4px;
-  --nav-space-sm: 8px;
-  --nav-space-md: 16px;
-  --nav-space-lg: 24px;
-  --nav-space-xl: 32px;
-
-  /* Metrics */
-  --nav-bar-height: 68px;
-  --nav-logo-size: 42px;
-  --nav-radius: 12px;
-  --nav-radius-pill: 999px;
-  --nav-radius-lg: 16px;
-
-  /* Effects */
-  --nav-shadow: 0 1px 4px rgba(10, 37, 64, 0.06);
-  --nav-shadow-lift: 0 8px 30px rgba(10, 37, 64, 0.10);
-  --nav-shadow-hover: 0 12px 40px rgba(10, 37, 64, 0.15);
-  --nav-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Gradients */
-  --nav-gradient-primary: linear-gradient(135deg, var(--nav-blue-700), var(--nav-blue-500));
-  --nav-gradient-accent: linear-gradient(135deg, #f39c12, #e67e22);
-  --nav-gradient-success: linear-gradient(135deg, #27ae60, #2ecc71);
-}
-
-/* ============================================================
-   2. NAVBAR BASE
+   1. NAVBAR UTAMA (Sticky Biru)
    ============================================================ */
 .navbar {
-  position: fixed;
-  inset: 0 0 auto 0;
+  background: linear-gradient(135deg, #0D47A1, #1565C0);
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
   z-index: 1000;
-  height: var(--nav-bar-height);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  box-shadow: var(--nav-shadow);
-  transition: box-shadow var(--nav-transition), 
-              background var(--nav-transition),
-              height var(--nav-transition);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Scrolled state */
-.navbar.scrolled {
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: var(--nav-shadow-lift);
-  height: 62px;
-  border-bottom: 1px solid var(--nav-silver-200);
+  box-shadow: 0 4px 30px rgba(13, 71, 161, 0.4);
+  border-bottom: 2px solid #42A5F5;
 }
 
 /* ============================================================
-   3. CONTAINER
+   2. CONTAINER (Logo Kiri, Menu Kanan Full)
    ============================================================ */
 .navbar__container {
-  max-width: 1400px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: var(--nav-space-md);
+  align-items: center;
+  padding: 0 20px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* ============================================================
-   4. BRAND / LOGO
+   3. LOGO & BRAND
    ============================================================ */
 .navbar__brand {
   display: flex;
   align-items: center;
-  gap: var(--nav-space-sm);
+  gap: 12px;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  font-weight: 700;
   text-decoration: none;
   flex-shrink: 0;
-  transition: transform var(--nav-transition);
-}
-
-.navbar__brand:hover {
-  transform: scale(1.02);
 }
 
 .navbar__logo {
-  width: var(--nav-logo-size);
-  height: var(--nav-logo-size);
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
   object-fit: contain;
-  display: block;
-  border-radius: var(--nav-radius);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: box-shadow var(--nav-transition);
 }
 
-.navbar__brand:hover .navbar__logo {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+.navbar__brand-title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.navbar__title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--nav-ink);
-  letter-spacing: -0.3px;
-  line-height: 1.2;
-  transition: color var(--nav-transition);
-}
-
-.navbar__title span {
-  color: var(--nav-blue-500);
+.navbar__brand-highlight {
   font-weight: 600;
-}
-
-.navbar__title .badge-online {
-  display: inline-block;
-  font-size: 0.5rem;
-  font-weight: 700;
-  background: var(--nav-success);
-  color: white;
-  padding: 1px 8px;
-  border-radius: var(--nav-radius-pill);
-  margin-left: 4px;
-  vertical-align: middle;
-  letter-spacing: 0.5px;
-  animation: pulse-dot 2s infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+  color: #64B5F6;
 }
 
 /* ============================================================
-   5. TOGGLE (mobile)
+   4. TOMBOL HAMBURGER (Mobile)
    ============================================================ */
 .navbar__toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin-left: auto;
-  border: 1px solid var(--nav-silver-200);
-  background: var(--nav-white);
-  color: var(--nav-blue-700);
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-  border-radius: var(--nav-radius);
-  transition: all var(--nav-transition);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.navbar__toggle:hover {
-  background: var(--nav-blue-100);
-  border-color: var(--nav-blue-300);
-  transform: scale(1.05);
-}
-
-.navbar__toggle:active {
-  transform: scale(0.95);
-}
-
-/* ============================================================
-   6. MENU (mobile-first: hidden dropdown)
-   ============================================================ */
-.navbar__menu {
-  position: absolute;
-  top: var(--nav-bar-height);
-  left: 0;
-  right: 0;
-  margin: 0;
-  padding: var(--nav-space-md);
-  list-style: none;
   display: none;
   flex-direction: column;
-  gap: var(--nav-space-xs);
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-top: 1px solid var(--nav-silver-200);
-  box-shadow: var(--nav-shadow-lift);
-  max-height: calc(100vh - var(--nav-bar-height));
-  overflow-y: auto;
-  padding-bottom: var(--nav-space-lg);
-}
-
-.navbar__menu.is-open {
-  display: flex;
-  animation: slideDown 0.3s ease forwards;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ============================================================
-   7. LINKS & BUTTONS (shared base)
-   ============================================================ */
-.navbar__link,
-.navbar__cta,
-.navbar__login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--nav-space-sm);
-  border: none;
-  font-family: inherit;
-  font-weight: 600;
+  gap: 5px;
   cursor: pointer;
-  text-decoration: none;
-  white-space: nowrap;
-  border-radius: var(--nav-radius-pill);
-  transition: all var(--nav-transition);
-  position: relative;
-  font-size: 0.9rem;
+  background: none;
+  border: none;
+  padding: 4px;
 }
 
-/* ============================================================
-   8. NAV LINK
-   ============================================================ */
-.navbar__link {
-  width: 100%;
-  padding: 10px var(--nav-space-md);
-  background: transparent;
-  color: var(--nav-ink-light);
-  font-size: 0.9rem;
-  font-weight: 500;
-  justify-content: flex-start;
-}
-
-.navbar__link:hover {
-  background: var(--nav-blue-50);
-  color: var(--nav-blue-700);
-  transform: translateX(4px);
-}
-
-.navbar__link.is-active {
-  background: var(--nav-blue-100);
-  color: var(--nav-blue-700);
-  font-weight: 600;
-}
-
-.navbar__link.is-active::before {
-  content: '';
-  position: absolute;
-  left: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 24px;
-  background: var(--nav-blue-500);
+.navbar__toggle span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #E3F2FD;
   border-radius: 4px;
 }
 
 /* ============================================================
-   9. LAYANAN ONLINE - MENU UTAMA (HIGHLIGHT)
+   5. MENU UTAMA (Desktop)
    ============================================================ */
-.navbar__link-layanan {
-  width: 100%;
-  padding: 10px var(--nav-space-md);
-  background: var(--nav-gradient-primary);
-  color: var(--nav-white) !important;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: var(--nav-radius-pill);
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(26, 82, 118, 0.25);
-  transition: all var(--nav-transition);
-  border: none;
-  cursor: pointer;
+.navbar__menu {
   display: flex;
+  gap: 6px; /* ★ Jarak antar menu diperkecil jadi 6px agar padat */
+  list-style: none;
   align-items: center;
-  gap: var(--nav-space-sm);
-}
-
-.navbar__link-layanan:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(26, 82, 118, 0.35);
-}
-
-.navbar__link-layanan:active {
-  transform: scale(0.97);
-}
-
-.navbar__link-layanan .icon {
-  font-size: 1.1rem;
-}
-
-.navbar__link-layanan .badge-hot {
-  background: var(--nav-danger);
-  color: white;
-  font-size: 0.55rem;
-  font-weight: 700;
-  padding: 1px 8px;
-  border-radius: var(--nav-radius-pill);
-  letter-spacing: 0.5px;
-  animation: pulse-dot 1.5s infinite;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem; /* ★ Font diperkecil agar muat banyak menu */
+  font-weight: 500;
 }
 
 /* ============================================================
-   10. ADMIN LOGIN
+   6. LINK BIASA
+   ============================================================ */
+.navbar__link {
+  color: #E3F2FD;
+  text-decoration: none;
+  padding: 6px 12px; /* ★ Padding diperkecil */
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Link yang Sedang Aktif (Beranda, dll) */
+.navbar__link--active {
+  background: #42A5F5;
+  color: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: 50px;
+}
+
+/* ============================================================
+   7. TOMBOL AJUKAN LAYANAN (CTA)
+   ============================================================ */
+.navbar__cta {
+  background: #42A5F5;
+  color: #FFFFFF;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  margin-left: 4px; /* Jarak sedikit dari menu sebelumnya */
+  font-size: 0.8rem;
+  box-shadow: 0 4px 15px rgba(66, 165, 245, 0.3);
+}
+
+.navbar__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 165, 245, 0.5);
+}
+
+/* ============================================================
+   8. TOMBOL LOGIN ADMIN (Baru)
    ============================================================ */
 .navbar__login {
-  width: 100%;
-  padding: 10px var(--nav-space-lg);
-  background: var(--nav-silver-100);
-  color: var(--nav-blue-700);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #E3F2FD;
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-decoration: none;
   font-size: 0.8rem;
-  border: 1px solid var(--nav-silver-300);
   font-weight: 500;
-  letter-spacing: 0.3px;
+  transition: 0.3s;
+  margin-left: 4px;
 }
 
 .navbar__login:hover {
-  background: var(--nav-blue-100);
-  border-color: var(--nav-blue-500);
-  transform: translateY(-1px);
-}
-
-.navbar__login:active {
-  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #42A5F5;
+  color: #FFFFFF;
 }
 
 .navbar__login .icon {
@@ -366,403 +171,37 @@
 }
 
 /* ============================================================
-   11. DESKTOP (min-width: 1024px)
+   9. RESPONSIVE (MOBILE)
    ============================================================ */
-@media (min-width: 1024px) {
+@media (max-width: 992px) {
   .navbar__toggle {
-    display: none;
-  }
-
-  .navbar__menu {
-    position: static;
     display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--nav-space-xs);
-    padding: 0;
-    border: none;
-    box-shadow: none;
-    overflow: visible;
-    max-height: none;
-    background: transparent;
-    backdrop-filter: none;
-    animation: none;
   }
-
-  .navbar__link {
-    width: auto;
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    justify-content: center;
-    border-radius: var(--nav-radius-pill);
-  }
-
-  .navbar__link.is-active::before {
+  
+  .navbar__menu {
     display: none;
+    width: 100%;
+    flex-direction: column;
+    padding: 16px 0;
+    gap: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .navbar__menu--open {
+    display: flex !important;
   }
 
-  .navbar__link.is-active {
-    background: var(--nav-blue-100);
-    color: var(--nav-blue-700);
+  .navbar__menu li {
+    width: 100%;
+    text-align: center;
   }
-
-  .navbar__link.is-active::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 2px;
-    background: var(--nav-blue-500);
-    border-radius: 4px;
-  }
-
-  .navbar__link:hover {
-    transform: translateY(0);
-  }
-
-  /* Layanan Online - Desktop */
-  .navbar__link-layanan {
+  
+  .navbar__link, .navbar__cta, .navbar__login {
+    display: inline-block;
     width: auto;
+    margin: 0 auto;
     padding: 8px 20px;
-    font-size: 0.85rem;
-    margin-left: var(--nav-space-xs);
   }
-
-  .navbar__link-layanan .badge-hot {
-    font-size: 0.5rem;
-    padding: 0 6px;
-  }
-
-  /* Admin Login - Desktop */
-  .navbar__login {
-    width: auto;
-    padding: 7px 16px;
-    font-size: 0.75rem;
-    margin-left: var(--nav-space-xs);
-  }
-
-  /* Scroll state desktop */
-  .navbar.scrolled .navbar__link {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-  }
-
-  .navbar.scrolled .navbar__link-layanan {
-    padding: 6px 16px;
-    font-size: 0.8rem;
-  }
-
-  .navbar.scrolled .navbar__login {
-    padding: 6px 14px;
-    font-size: 0.7rem;
-  }
-}
-
-/* ============================================================
-   12. TABLET (768px - 1023px)
-   ============================================================ */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .navbar__toggle {
-    display: none;
-  }
-
-  .navbar__menu {
-    position: static;
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--nav-space-xs);
-    padding: 0;
-    border: none;
-    box-shadow: none;
-    overflow: visible;
-    max-height: none;
-    background: transparent;
-    backdrop-filter: none;
-  }
-
-  .navbar__link {
-    width: auto;
-    padding: 6px 10px;
-    font-size: 0.75rem;
-    justify-content: center;
-  }
-
-  .navbar__link-layanan {
-    width: auto;
-    padding: 6px 14px;
-    font-size: 0.75rem;
-  }
-
-  .navbar__login {
-    width: auto;
-    padding: 6px 12px;
-    font-size: 0.7rem;
-  }
-
-  .navbar__title {
-    font-size: 0.95rem;
-  }
-
-  .navbar__logo {
-    width: 36px;
-    height: 36px;
-  }
-}
-
-/* ============================================================
-   13. MOBILE (max-width: 767px)
-   ============================================================ */
-@media (max-width: 767px) {
-  .navbar {
-    height: 60px;
-  }
-
-  .navbar.scrolled {
-    height: 56px;
-  }
-
-  .navbar__container {
-    padding: 0 12px 0 6px;
-  }
-
-  .navbar__brand {
-    gap: 6px;
-  }
-
-  .navbar__logo {
-    width: 36px;
-    height: 36px;
-  }
-
-  .navbar__title {
-    font-size: 0.9rem;
-  }
-
-  .navbar__title .badge-online {
-    font-size: 0.45rem;
-    padding: 0 6px;
-  }
-
-  .navbar__menu {
-    top: 60px;
-    padding: 12px;
-    gap: 4px;
-  }
-
-  .navbar.scrolled .navbar__menu {
-    top: 56px;
-  }
-
-  .navbar__link {
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    justify-content: flex-start;
-  }
-
-  .navbar__link-layanan {
-    padding: 10px 16px;
-    font-size: 0.9rem;
-    margin-top: 4px;
-  }
-
-  .navbar__login {
-    padding: 8px 14px;
-    font-size: 0.8rem;
-    margin-top: 2px;
-  }
-}
-
-/* ============================================================
-   14. MOBILE KECIL (max-width: 480px)
-   ============================================================ */
-@media (max-width: 480px) {
-  .navbar {
-    height: 56px;
-  }
-
-  .navbar.scrolled {
-    height: 52px;
-  }
-
-  .navbar__container {
-    padding: 0 8px 0 4px;
-  }
-
-  .navbar__logo {
-    width: 32px;
-    height: 32px;
-  }
-
-  .navbar__title {
-    font-size: 0.8rem;
-  }
-
-  .navbar__title .badge-online {
-    display: none;
-  }
-
-  .navbar__toggle {
-    width: 38px;
-    height: 38px;
-    font-size: 1.2rem;
-  }
-
-  .navbar__menu {
-    top: 56px;
-    padding: 10px;
-  }
-
-  .navbar.scrolled .navbar__menu {
-    top: 52px;
-  }
-
-  .navbar__link {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-  }
-
-  .navbar__link-layanan {
-    padding: 8px 14px;
-    font-size: 0.8rem;
-  }
-
-  .navbar__login {
-    padding: 6px 12px;
-    font-size: 0.75rem;
-  }
-}
-
-/* ============================================================
-   15. DARK MODE
-   ============================================================ */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --nav-ink: #e2e8f0;
-    --nav-ink-light: #a0b4c8;
-    --nav-white: #1a1a2e;
-    --nav-silver-100: #1e293b;
-    --nav-silver-200: #2d3748;
-    --nav-silver-300: #4a5568;
-  }
-
-  .navbar {
-    background: rgba(15, 23, 42, 0.92);
-    backdrop-filter: blur(16px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .navbar.scrolled {
-    background: rgba(15, 23, 42, 0.96);
-    border-bottom: 1px solid var(--nav-silver-200);
-  }
-
-  .navbar__title {
-    color: var(--nav-ink);
-  }
-
-  .navbar__title span {
-    color: var(--nav-blue-400);
-  }
-
-  .navbar__menu {
-    background: rgba(15, 23, 42, 0.98);
-    backdrop-filter: blur(16px) saturate(180%);
-    border-top: 1px solid var(--nav-silver-200);
-  }
-
-  .navbar__link {
-    color: var(--nav-ink-light);
-  }
-
-  .navbar__link:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--nav-blue-400);
-  }
-
-  .navbar__link.is-active {
-    background: rgba(41, 128, 185, 0.15);
-    color: var(--nav-blue-400);
-  }
-
-  .navbar__link.is-active::after {
-    background: var(--nav-blue-400);
-  }
-
-  .navbar__link-layanan {
-    background: linear-gradient(135deg, var(--nav-blue-600), var(--nav-blue-400));
-  }
-
-  .navbar__login {
-    background: var(--nav-silver-100);
-    color: var(--nav-ink);
-    border-color: var(--nav-silver-300);
-  }
-
-  .navbar__login:hover {
-    background: rgba(41, 128, 185, 0.15);
-    border-color: var(--nav-blue-400);
-    color: var(--nav-blue-400);
-  }
-
-  .navbar__toggle {
-    background: var(--nav-silver-100);
-    border-color: var(--nav-silver-300);
-    color: var(--nav-ink);
-  }
-
-  .navbar__toggle:hover {
-    background: rgba(41, 128, 185, 0.15);
-    border-color: var(--nav-blue-400);
-  }
-}
-
-/* ============================================================
-   16. PRINT
-   ============================================================ */
-@media print {
-  .navbar {
-    position: relative;
-    box-shadow: none;
-    background: white !important;
-    height: auto !important;
-    padding: 10px 0;
-  }
-
-  .navbar__menu {
-    display: none !important;
-  }
-
-  .navbar__toggle {
-    display: none !important;
-  }
-
-  .navbar__title span {
-    color: var(--nav-blue-700) !important;
-  }
-}
-
-/* ============================================================
-   17. SCROLLBAR STYLING (mobile menu)
-   ============================================================ */
-.navbar__menu::-webkit-scrollbar {
-  width: 4px;
-}
-
-.navbar__menu::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.navbar__menu::-webkit-scrollbar-thumb {
-  background: var(--nav-silver-300);
-  border-radius: 10px;
-}
-
-.navbar__menu::-webkit-scrollbar-thumb:hover {
-  background: var(--nav-silver-500);
 }

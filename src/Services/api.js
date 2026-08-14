@@ -1,24 +1,32 @@
 // src/services/api.js
 import axios from "axios";
 
-// Perbaiki: Gunakan nama variable yang konsisten
-const API_URL = "http://localhost:3001";
+// ★ PERBAIKAN UNTUK HOSTING ★
+// Jika website dijalankan di lokal (localhost), pakai port 5000.
+// Jika sudah di-deploy ke Vercel, otomatis akan memakai link hosting.
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Ganti 'nama-user-github' dan 'nama-repo' dengan punya Anda
+// Contoh: https://my-json-server.typicode.com/abdul/desa-tasik-main
+const API_URL = isProduction 
+  ? "https://my-json-server.typicode.com/NAMA_USER_GITHUB/NAMA_REPO_ANDA" 
+  : "http://localhost:5000";
 
 const api = axios.create({
-    baseURL: API_URL, // ← Perbaiki: pakai API_URL (bukan API_BASE_URL)
+    baseURL: API_URL, 
     timeout: 10000,
     headers: {
         "Content-Type": "application/json",
     },
 });
 
-// Fungsi untuk mendapatkan data
+// --- Fungsi GET Data ---
 export const getWarga = async () => {
     try {
         const response = await api.get("/warga");
         return response.data;
     } catch (error) {
-        console.error(" Error getWarga:", error);
+        console.error("❌ Error getWarga:", error);
         return [];
     }
 };
@@ -53,7 +61,7 @@ export const getBerita = async () => {
     }
 };
 
-// Tambahkan fungsi CRUD
+// --- Fungsi CRUD (Create, Update, Delete) ---
 export const postWarga = async (data) => {
     const response = await api.post("/warga", data);
     return response.data;
@@ -114,5 +122,4 @@ export const deletePengaduan = async (id) => {
     return response.data;
 };
 
-// Export default untuk axios instance
 export default api;
